@@ -1,11 +1,11 @@
 """Tag chip input widget."""
 from __future__ import annotations
 
-from PySide6.QtCore import Signal
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, Signal,
     QWidget, QHBoxLayout, QPushButton, QLineEdit, QSizePolicy, QScrollArea,
+    Qt_ScrollBarAlwaysOff,
 )
-from PySide6.QtCore import Qt
 
 
 class TagInputWidget(QWidget):
@@ -25,8 +25,8 @@ class TagInputWidget(QWidget):
 
         # Scrollable chip area
         self._scroll = QScrollArea()
-        self._scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        self._scroll.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self._scroll.setHorizontalScrollBarPolicy(Qt_ScrollBarAlwaysOff)
+        self._scroll.setVerticalScrollBarPolicy(Qt_ScrollBarAlwaysOff)
         self._scroll.setWidgetResizable(True)
         self._scroll.setFixedHeight(34)
         self._scroll.setStyleSheet(

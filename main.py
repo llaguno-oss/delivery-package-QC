@@ -9,8 +9,7 @@ Requirements:
     pip install -r requirements.txt
 """
 import sys
-from PySide6.QtWidgets import QApplication
-from PySide6.QtCore import Qt
+from ui.compat import QApplication
 from ui.main_window import MainWindow
 from ui.theme import DARK_QSS
 
@@ -24,7 +23,9 @@ def main():
     window = MainWindow()
     window.show()
 
-    sys.exit(app.exec())
+    # PySide2 uses exec_(); PySide6 uses exec()
+    _exec = getattr(app, 'exec_', None) or app.exec
+    sys.exit(_exec())
 
 
 if __name__ == '__main__':

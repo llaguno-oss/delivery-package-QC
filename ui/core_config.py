@@ -4,12 +4,12 @@ from __future__ import annotations
 import uuid
 from typing import List
 
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtGui import QColor
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, Signal, QColor,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QComboBox, QFrame,
     QSizePolicy, QScrollArea,
+    Qt_SizeVerCursor, Qt_RichText, Qt_MoveAction, Qt_UserRole,
 )
 
 from config import FilenameBlock, CoreConfig
@@ -41,7 +41,7 @@ class FilenameBlockRow(QWidget):
         handle = QLabel('⠿')
         handle.setFixedWidth(16)
         handle.setStyleSheet('color: #555c7a; font-size: 14px;')
-        handle.setCursor(Qt.SizeVerCursor)
+        handle.setCursor(Qt_SizeVerCursor)
         layout.addWidget(handle)
 
         # Label
@@ -181,7 +181,7 @@ class FilenameBlocksWidget(QWidget):
         # Live preview
         self._preview_label = QLabel('Add blocks below to see a preview')
         self._preview_label.setWordWrap(True)
-        self._preview_label.setTextFormat(Qt.RichText)
+        self._preview_label.setTextFormat(Qt_RichText)
         self._preview_label.setStyleSheet(
             'background: #1a1d27; border: 1px solid #333650; border-radius: 6px;'
             ' padding: 8px 12px; min-height: 36px;'
@@ -223,7 +223,7 @@ class FilenameBlocksWidget(QWidget):
         # Block list (drag to reorder)
         self._list = QListWidget()
         self._list.setDragDropMode(QListWidget.InternalMove)
-        self._list.setDefaultDropAction(Qt.MoveAction)
+        self._list.setDefaultDropAction(Qt_MoveAction)
         self._list.setSelectionMode(QListWidget.SingleSelection)
         self._list.setSpacing(2)
         self._list.setMinimumHeight(80)
@@ -254,7 +254,7 @@ class FilenameBlocksWidget(QWidget):
 
         item = QListWidgetItem(self._list)
         item.setSizeHint(row_widget.sizeHint())
-        item.setData(Qt.UserRole, block.id)
+        item.setData(Qt_UserRole, block.id)
         self._list.addItem(item)
         self._list.setItemWidget(item, row_widget)
         self._rows[block.id] = row_widget
@@ -262,7 +262,7 @@ class FilenameBlocksWidget(QWidget):
     def _remove_block(self, block_id: str):
         for i in range(self._list.count()):
             item = self._list.item(i)
-            if item.data(Qt.UserRole) == block_id:
+            if item.data(Qt_UserRole) == block_id:
                 self._list.takeItem(i)
                 self._rows.pop(block_id, None)
                 break
@@ -310,7 +310,7 @@ class FilenameBlocksWidget(QWidget):
         result = []
         for i in range(self._list.count()):
             item = self._list.item(i)
-            block_id = item.data(Qt.UserRole)
+            block_id = item.data(Qt_UserRole)
             row = self._rows.get(block_id)
             if row:
                 result.append(row.get_block())

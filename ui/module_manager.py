@@ -1,9 +1,10 @@
 """Module manager tab — toggle which optional modules are enabled."""
 from __future__ import annotations
 
-from PySide6.QtCore import Signal, Qt
-from PySide6.QtWidgets import (
-    QWidget, QVBoxLayout, QHBoxLayout, QLabel, QGridLayout, QFrame,
+from ui.compat import (
+    Qt, Signal,
+    QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel, QFrame,
+    Qt_PointingHandCursor, Qt_RichText,
 )
 
 from config import QCConfig
@@ -73,7 +74,7 @@ class ModuleToggleCard(QFrame):
         # Toggle button
         self._toggle_btn = QLabel()
         self._toggle_btn.setFixedSize(44, 24)
-        self._toggle_btn.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._toggle_btn.setCursor(Qt_PointingHandCursor)
         layout.addWidget(self._toggle_btn)
         self.mousePressEvent = self._on_click
 
@@ -94,7 +95,7 @@ class ModuleToggleCard(QFrame):
             self._toggle_btn.setText(
                 '<span style="color:white; font-size:10px; padding-left:22px;">ON</span>'
             )
-            self._toggle_btn.setTextFormat(Qt.TextFormat.RichText)
+            self._toggle_btn.setTextFormat(Qt_RichText)
         else:
             self.setStyleSheet(
                 'ModuleToggleCard { border: 1px solid #333650; border-radius: 10px;'
@@ -109,7 +110,7 @@ class ModuleToggleCard(QFrame):
             self._toggle_btn.setText(
                 '<span style="color:#8b90a7; font-size:10px; padding-left:4px;">OFF</span>'
             )
-            self._toggle_btn.setTextFormat(Qt.TextFormat.RichText)
+            self._toggle_btn.setTextFormat(Qt_RichText)
 
     def set_enabled(self, enabled: bool):
         self._enabled = enabled

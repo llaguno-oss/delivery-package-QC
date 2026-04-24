@@ -4,9 +4,8 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Callable, Optional
 
-from PySide6.QtCore import Qt, QThread, Signal, QObject
-from PySide6.QtGui import QColor, QFont
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, QThread, Signal, QObject, QColor, QFont,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QLineEdit, QFileDialog, QTreeWidget, QTreeWidgetItem,
     QProgressBar, QRadioButton, QButtonGroup, QFrame, QSizePolicy,

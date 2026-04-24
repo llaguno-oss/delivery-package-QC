@@ -3,10 +3,11 @@ from __future__ import annotations
 
 import uuid
 
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, Signal,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTableWidget, QTableWidgetItem, QLineEdit, QComboBox, QHeaderView,
+    Qt_UserRole,
 )
 
 from config import CodecEntry, CodecsConfig
@@ -98,7 +99,7 @@ class CodecsTab(QWidget):
         self._table.insertRow(row)
 
         name_item = QTableWidgetItem(entry.name)
-        name_item.setData(Qt.UserRole, entry.id)
+        name_item.setData(Qt_UserRole, entry.id)
         self._table.setItem(row, self.COL_NAME, name_item)
 
         kind_combo = QComboBox()
@@ -132,7 +133,7 @@ class CodecsTab(QWidget):
             name_item = self._table.item(row, self.COL_NAME)
             kind_combo = self._table.cellWidget(row, self.COL_KIND)
             aliases_widget = self._table.cellWidget(row, self.COL_ALIASES)
-            entry_id = name_item.data(Qt.UserRole) if name_item else str(uuid.uuid4())
+            entry_id = name_item.data(Qt_UserRole) if name_item else str(uuid.uuid4())
             entries.append(CodecEntry(
                 id=entry_id,
                 name=name_item.text() if name_item else '',

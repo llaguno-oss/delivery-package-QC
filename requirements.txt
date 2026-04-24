@@ -1,5 +1,7 @@
-# Core UI framework
-PySide6>=5.14
+# Core UI framework — install one of the following:
+#   pip install PySide6        (Qt 6, recommended)
+#   pip install PySide2        (Qt 5, legacy)
+PySide6>=6.0
 
 # Optional: codec and resolution checking via ffprobe
 # (no pip install needed - ffprobe is part of ffmpeg)

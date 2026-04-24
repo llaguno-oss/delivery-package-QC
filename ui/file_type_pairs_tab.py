@@ -3,10 +3,11 @@ from __future__ import annotations
 
 import uuid
 
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, Signal,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView,
+    Qt_UserRole, Qt_gray, Qt_ItemIsEditable,
 )
 
 from config import FileTypePairEntry, FileTypePairsConfig
@@ -118,12 +119,12 @@ class FileTypePairsTab(QWidget):
         self._table.insertRow(row)
 
         label_item = QTableWidgetItem(entry.label)
-        label_item.setData(Qt.UserRole, entry.id)
+        label_item.setData(Qt_UserRole, entry.id)
         primary_item = QTableWidgetItem(entry.primaryExtension)
         primary_item.setFont(self._table.font())
         arrow_item = QTableWidgetItem('→ requires')
-        arrow_item.setForeground(Qt.gray)
-        arrow_item.setFlags(arrow_item.flags() & ~Qt.ItemIsEditable)
+        arrow_item.setForeground(Qt_gray)
+        arrow_item.setFlags(arrow_item.flags() & ~Qt_ItemIsEditable)
         companion_item = QTableWidgetItem(entry.companionExtension)
         companion_item.setFont(self._table.font())
 
@@ -151,7 +152,7 @@ class FileTypePairsTab(QWidget):
             label_item = self._table.item(row, self.COL_LABEL)
             primary_item = self._table.item(row, self.COL_PRIMARY)
             companion_item = self._table.item(row, self.COL_COMPANION)
-            entry_id = label_item.data(Qt.UserRole) if label_item else str(uuid.uuid4())
+            entry_id = label_item.data(Qt_UserRole) if label_item else str(uuid.uuid4())
             entries.append(FileTypePairEntry(
                 id=entry_id,
                 label=label_item.text() if label_item else '',

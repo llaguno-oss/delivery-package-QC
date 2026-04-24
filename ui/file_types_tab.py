@@ -3,10 +3,11 @@ from __future__ import annotations
 
 import uuid
 
-from PySide6.QtCore import Qt, Signal
-from PySide6.QtWidgets import (
+from ui.compat import (
+    Qt, Signal,
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QTableWidget, QTableWidgetItem, QLineEdit, QHeaderView,
+    Qt_UserRole,
 )
 
 from config import FileTypeEntry, FileTypesConfig
@@ -99,7 +100,7 @@ class FileTypesTab(QWidget):
         self._table.insertRow(row)
 
         name_item = QTableWidgetItem(entry.name)
-        name_item.setData(Qt.UserRole, entry.id)
+        name_item.setData(Qt_UserRole, entry.id)
         ext_item = QTableWidgetItem(entry.extension)
         ext_item.setFont(self._table.font())
         desc_item = QTableWidgetItem(entry.description)
@@ -127,7 +128,7 @@ class FileTypesTab(QWidget):
             name_item = self._table.item(row, self.COL_NAME)
             ext_item = self._table.item(row, self.COL_EXT)
             desc_item = self._table.item(row, self.COL_DESC)
-            entry_id = name_item.data(Qt.UserRole) if name_item else str(uuid.uuid4())
+            entry_id = name_item.data(Qt_UserRole) if name_item else str(uuid.uuid4())
             entries.append(FileTypeEntry(
                 id=entry_id,
                 name=name_item.text() if name_item else '',
