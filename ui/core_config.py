@@ -4,9 +4,9 @@ from __future__ import annotations
 import uuid
 from typing import List
 
-from PySide2.QtCore import Qt, Signal
-from PySide2.QtGui import QColor
-from PySide2.QtWidgets import (
+from PySide6.QtCore import Qt, Signal
+from PySide6.QtGui import QColor
+from PySide6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QLabel, QPushButton,
     QListWidget, QListWidgetItem, QLineEdit, QComboBox, QFrame,
     QSizePolicy, QScrollArea,

@@ -1,11 +1,11 @@
 """Tag chip input widget."""
 from __future__ import annotations
 
-from PySide2.QtCore import Signal
-from PySide2.QtWidgets import (
+from PySide6.QtCore import Signal
+from PySide6.QtWidgets import (
     QWidget, QHBoxLayout, QPushButton, QLineEdit, QSizePolicy, QScrollArea,
 )
-from PySide2.QtCore import Qt
+from PySide6.QtCore import Qt
 
 
 class TagInputWidget(QWidget):
